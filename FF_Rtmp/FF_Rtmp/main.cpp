@@ -150,11 +150,15 @@ int main(int argc, char *argv[])
         
         //视频帧
         if(index_type == AVMEDIA_TYPE_VIDEO){
+            
+            //AVRational结构体中保存一个分子和分母，表示一秒中有多少个时间单位
             AVRational tb = inFormatCtx->streams[pkt.stream_index]->time_base;
             
             //已经过去的时间
             long long now = av_gettime() - startTime;
             long long dts = 0;
+            
+            //pkt.dts * r2d(tb)表示为秒值，转微秒要乘以 1000*1000
             dts = pkt.dts * (1000 * 1000 * r2d(tb)); //微秒数
             
             if(dts > now){
