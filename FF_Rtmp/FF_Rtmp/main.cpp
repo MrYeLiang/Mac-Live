@@ -97,7 +97,8 @@ int main(int argc, char *argv[])
         //复制配置信息
         //re = avcodec_copy_context(out->codec, inFormatCtx->streams[i]->codec);
         re = avcodec_parameters_copy(out->codecpar, inFormatCtx->streams[i]->codecpar);
-        out->codec->codec_tag = 0;
+        
+        out->codec->codec_tag = 0;//表示不需要编码，只是把封装的格式写进去
     }
     
     //打印的s输出流信息
