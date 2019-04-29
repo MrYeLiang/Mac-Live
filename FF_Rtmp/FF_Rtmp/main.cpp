@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     
     av_dump_format(inFormatCtx, 0, inUrl, 0);
     
-    //以下是打印的音频和视频流信息
+    //以下是打印的音频和视频流信息(mp4的)
     //    Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/yeliang/Desktop/video_data/video.mp4':
     //        Metadata:
     //            major_brand     : isom
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
         pkt.pos = -1;
         
         if(pkt.stream_index == 0){
-            av_usleep(20);
+            av_usleep(30*1000);
         }
         
         re = av_interleaved_write_frame(outFormatCtx, &pkt);
@@ -148,10 +148,8 @@ int main(int argc, char *argv[])
             return printError(re);
         }
         
-        getchar();
-        
     }
-    
+    getchar();
     return 0;
 }
 
