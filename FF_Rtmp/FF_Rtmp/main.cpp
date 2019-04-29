@@ -25,6 +25,11 @@ int printError(int errorNum)
     return -1;
 }
 
+static double r2d(AVRational r)
+{
+    return r.num == 0 || r.den == 0 ? 0. : (double)r.num/(double)r.den;
+}
+
 int main(int argc, char *argv[])
 {
     char  *inUrl = "/Users/yeliang/Desktop/video_data/test.flv";
@@ -52,7 +57,8 @@ int main(int argc, char *argv[])
         return printError(re);
     }
     
-    av_dump_format(inFormatCtx, 0, inUrl, 0);
+    //打印视频流信息
+    //av_dump_format(inFormatCtx, 0, inUrl, 0);
     
     //以下是打印的音频和视频流信息(mp4的)
     //    Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/yeliang/Desktop/video_data/video.mp4':
@@ -94,8 +100,8 @@ int main(int argc, char *argv[])
         out->codec->codec_tag = 0;
     }
     
-    av_dump_format(outFormatCtx, 0, outUrl, 1);
     //打印的s输出流信息
+    //av_dump_format(outFormatCtx, 0, outUrl, 1);
     //    Stream #0:0: Audio: mp3, 44100 Hz, stereo, fltp, 128 kb/s
     //    Stream #0:1: Video: flv1, yuv420p, 1920x1080, q=2-31, 200 kb/s
     
@@ -120,6 +126,8 @@ int main(int argc, char *argv[])
     //推流每一帧数据
     AVPacket pkt;
     
+    long long startTime = av_gettime();//微秒时间戳  1970年距今天的时间h微秒值
+    
     for(;;)
     {
         re = av_read_frame(inFormatCtx, &pkt);
@@ -138,12 +146,27 @@ int main(int argc, char *argv[])
         pkt.duration = av_rescale_q_rnd(pkt.duration, inTime, outTime, (AVRounding)(AV_ROUND_NEAR_INF | AV_ROUND_NEAR_INF));
         pkt.pos = -1;
         
-        if(pkt.stream_index == 0){
-            av_usleep(30*1000);
+        int index_type = inFormatCtx->streams[pkt.stream_index]->codecpar->codec_type;
+        
+        //视频帧
+        if(index_type == AVMEDIA_TYPE_VIDEO){
+            AVRational tb = inFormatCtx->streams[pkt.stream_index]->time_base;
+            
+            //已经过去的时间
+            long long now = av_gettime() - startTime;
+            long long dts = 0;
+            dts = pkt.dts * (1000 * 1000 * r2d(tb)); //微秒数
+            
+            if(dts > now){
+                
+                //解码时间如果太快，那么直播将会进度不统一。所以这里会用解码时间减去已经消耗的时间。
+                //比如当前已经解码到了第十秒这一帧，但是距离开始发送帧数据只过去了9秒，那么就延迟一秒发送
+                av_usleep(dts - now);
+            }
+            
         }
         
         re = av_interleaved_write_frame(outFormatCtx, &pkt);
-        
         if(re < 0){
             return printError(re);
         }
