@@ -17,6 +17,7 @@
 		2B52819B22769720007B880F /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52819222769720007B880F /* libavdevice.a */; };
 		2B52819C22769720007B880F /* libavresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52819322769720007B880F /* libavresample.a */; };
 		2B52819D22769720007B880F /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B52819422769720007B880F /* libavfilter.a */; };
+		2BE0D3EB227EBC27002EAF5C /* RtmpPusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0D3E9227EBC27002EAF5C /* RtmpPusher.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		2B52819222769720007B880F /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../../../../../../usr/local/Cellar/ffmpeg/4.1.2/lib/libavdevice.a; sourceTree = "<group>"; };
 		2B52819322769720007B880F /* libavresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavresample.a; path = ../../../../../../usr/local/Cellar/ffmpeg/4.1.2/lib/libavresample.a; sourceTree = "<group>"; };
 		2B52819422769720007B880F /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../../../../../../usr/local/Cellar/ffmpeg/4.1.2/lib/libavfilter.a; sourceTree = "<group>"; };
+		2BE0D3E9227EBC27002EAF5C /* RtmpPusher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RtmpPusher.cpp; sourceTree = "<group>"; };
+		2BE0D3EA227EBC27002EAF5C /* RtmpPusher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RtmpPusher.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				2B528184227692C8007B880F /* main.cpp */,
+				2BE0D3E9227EBC27002EAF5C /* RtmpPusher.cpp */,
+				2BE0D3EA227EBC27002EAF5C /* RtmpPusher.hpp */,
 			);
 			path = FF_Rtmp;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B528185227692C8007B880F /* main.cpp in Sources */,
+				2BE0D3EB227EBC27002EAF5C /* RtmpPusher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
