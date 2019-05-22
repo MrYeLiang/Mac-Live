@@ -7,12 +7,16 @@
 //
 
 #include "RtmpPusher.hpp"
+#include "OpenCvCamera.hpp"
 
 int main(int argc, char *argv[])
 {
     //rtmp推流测试
-    RtmpPusher pusher;
-    pusher.doPush();
+//    RtmpPusher pusher;
+//    pusher.doPush();
+    
+    OpenCvCamera camera;
+    camera.capture();
 }
     
 
