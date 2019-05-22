@@ -22,21 +22,30 @@ int OpenCvCamera::capture()
     VideoCapture cam;
     namedWindow("video");
     
-    if(cam.open(0)){
-        cout << "open camera success!" << endl;
-    }else{
-        cout << "open camera failed!" << endl;
-        
-        waitKey(1);
-        return -1;
-    }
-    
-    Mat frame;
-    for(;;)
+    try
     {
-        cam.read(frame);
-        imshow("video", frame);
-        waitKey(1);
+        if(cam.open(0)){
+            cout << "open camera success!" << endl;
+        }else{
+            cout << "open camera failed!" << endl;
+            
+            waitKey(1);
+            return -1;
+        }
+        
+        Mat frame;
+        for(;;)
+        {
+            cam.read(frame);
+            imshow("video", frame);
+            waitKey(1);
+        }
+    } catch(exception &ex)
+    {
+        if(cam.isOpened()){
+            cam.release();
+        }
+         cerr << ex.what() <<endl;
     }
     
     getchar();
