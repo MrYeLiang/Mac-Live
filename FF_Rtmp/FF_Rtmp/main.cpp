@@ -6,13 +6,13 @@
 //  Copyright © 2019 叶亮. All rights reserved.
 //
 
-#include "RtmpPusher.hpp"
+#include "TestRtmpPusher.hpp"
 #include "OpenCvCamera.hpp"
 
 int main(int argc, char *argv[])
 {
     //rtmp推流测试
-//    RtmpPusher pusher;
+//    TestRtmpPusher pusher;
 //    pusher.doPush();
     
     OpenCvCamera camera;

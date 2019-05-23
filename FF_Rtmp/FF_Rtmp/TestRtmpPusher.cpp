@@ -1,12 +1,12 @@
 //
-//  RtmpPusher.cpp
+//  TestRtmpPusher.cpp
 //  FF_Rtmp
 //
-//  Created by 叶亮 on 2019/5/5.
+//  Created by 叶亮 on 2019/5/23.
 //  Copyright © 2019 叶亮. All rights reserved.
 //
 
-#include "RtmpPusher.hpp"
+#include "TestRtmpPusher.hpp"
 
 extern "C"{
 #include "libavformat/avformat.h"
@@ -32,7 +32,7 @@ static double r2d(AVRational r)
     return r.num == 0 || r.den == 0 ? 0. : (double)r.num/(double)r.den;
 }
 
-int RtmpPusher::doPush()
+int TestRtmpPusher::doPush()
 {
     char  *inUrl = "/Users/yeliang/Desktop/video_data/test.flv";
     char  *outUrl = "rtmp://localhost/live";
@@ -182,4 +182,3 @@ int RtmpPusher::doPush()
     getchar();
     return 0;
 }
-
