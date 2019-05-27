@@ -91,8 +91,6 @@ public:
             return NULL;
         }
         
-        cout << "RGBToYUV 转换成功! " << endl;
-        
         return yuvFrame;
     }
     
@@ -100,7 +98,7 @@ public:
     bool InitVideoCodec()
     {
         //1 查找解码器
-        AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_H264);
+        AVCodec *codec = avcodec_find_encoder(AV_CODEC_ID_H264);
         if(!codec){
             cout << "Can't find h264 encoder!" << endl;
             return false;
