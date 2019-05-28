@@ -11,10 +11,11 @@
 
 int main(int argc, char *argv[])
 {
-    //rtmp推流测试
+    //01 rtmp推流(视频源为本地)测试
 //    TestRtmpPusher pusher;
 //    pusher.doPush();
     
+    //02 视频采集并推流
     OpenCvCamera camera;
     camera.capture();
 }
